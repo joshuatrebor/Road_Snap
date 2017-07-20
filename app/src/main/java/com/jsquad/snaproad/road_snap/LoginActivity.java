@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userId = authenticateUser(txtEmail.getText().toString(), txtPassword.getText().toString());
                 if(userId != null){
-                    Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("userId", userId);
                     startActivity(intent);
                 }
