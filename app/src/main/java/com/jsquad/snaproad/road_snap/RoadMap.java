@@ -19,12 +19,8 @@ public class RoadMap implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
-        googleMap.moveCamera(CameraUpdateFactory.zoomTo(18));
-    }
-
-    public void locationChanged(Location location){
-        LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
+        googleMap.moveCamera(CameraUpdateFactory.zoomTo(17));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(14.6091,121.0223)));
     }
 
 }

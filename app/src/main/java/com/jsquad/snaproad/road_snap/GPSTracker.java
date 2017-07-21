@@ -41,8 +41,7 @@ public class GPSTracker implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        roadMap.locationChanged(location);
-        Log.d("jocas", location.getLatitude() + " " + location.getLongitude());
+        //TODO
     }
 
     @Override
