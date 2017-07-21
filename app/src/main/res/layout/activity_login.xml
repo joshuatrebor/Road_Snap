@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1c40f"
+    android:background="@drawable/back"
     tools:context="com.jsquad.snaproad.road_snap.LoginActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -20,7 +20,7 @@
         android:orientation="vertical"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
-        android:paddingTop="50dp"
+        android:paddingTop="100dp"
         android:weightSum="1">
 
         <ImageView
@@ -36,16 +36,18 @@
             android:fontFamily="sans-serif-smallcaps"
             android:text="Road Snap"
             android:textAlignment="center"
-            android:textColor="@android:color/black"
+            android:textColor="#f1c40f"
             android:textSize="36sp" />
 
         <EditText
             android:id="@+id/txtEmail"
+            style="@android:style/Widget.Material.Light.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Email Address"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="#f1c40f" />
 
         <EditText
             android:id="@+id/txtPassword"
