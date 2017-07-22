@@ -1,14 +1,10 @@
 package com.jsquad.snaproad.road_snap;
 
-import android.content.Context;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -20,19 +16,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, LocationListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     private GPSTracker tracker;
     private RoadMap roadMap;
@@ -171,7 +164,14 @@ public class MainActivity extends AppCompatActivity
                     Log.d("JOCAS", "GOOGLE MAP LOCATION CHANGED");
                     roadMap.moveCamera(location);
                 }
+                break;
             }
+            case R.id.mnDashCam:{
+                Intent intent = new Intent(MainActivity.this, DashCamActivity.class);
+                startActivity(intent);
+                break;
+            }
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -179,23 +179,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        Log.d("JOCAS","ASD");
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.d("JOCAS","ASDD");
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        Log.d("JOCAS","ASDS");
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        Log.d("JOCAS","ASDD");
-    }
 }
