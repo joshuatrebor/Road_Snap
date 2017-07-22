@@ -37,10 +37,6 @@ public class LoginActivity extends AppCompatActivity implements OnCompleteListen
         init();
     }
 
-    public void locationTest(){
-        Intent inten = new Intent(LoginActivity.this, TestActivity.class);
-        startActivity(inten);
-    }
 
     private void init(){
         btnLogin.setOnClickListener(new View.OnClickListener() {
