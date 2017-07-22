@@ -51,7 +51,7 @@
             android:ems="4"
             android:gravity="center"
             android:hint="Email Address"
-            android:textColorHint="#424141"
+            android:textColorHint="#e6e2e2"
             android:inputType="textEmailAddress"
             android:textColor="#272727"
             android:backgroundTint="@android:color/holo_red_light" />
@@ -64,8 +64,7 @@
             android:gravity="center"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColorHint="#424141"
-            android:paddingTop="10dp"
+            android:textColorHint="#e6e2e2"
             android:textColor="#272727"
             android:backgroundTint="@android:color/holo_red_light" />
 
