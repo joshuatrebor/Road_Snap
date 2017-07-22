@@ -1,9 +1,14 @@
 package com.jsquad.snaproad.road_snap;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -22,7 +27,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener, LocationListener {
 
     private GPSTracker tracker;
     private RoadMap roadMap;
@@ -54,14 +59,32 @@ public class MainActivity extends AppCompatActivity
         //NAVIGATION VIEW
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //INITIALIZE
+        init();
     }
 
     private void init(){
+        //Initialize GPSTracker
+        tracker = new GPSTracker(this);
+        tracker.start(400,0, null);
+
+        //Initialize Google Map
         roadMap = new RoadMap();
-        Location location = new Location("gps");
-        location.setLatitude(14.599512);
-        location.setLongitude(120.984222);
-        roadMap.displayMap(location);
+        //Get current location
+        //Location location = tracker.getLastKnownLocation();
+        Location location = null;
+        if(location == null){   //if there's no current location
+            Log.d("JOCAS", "DEFAULT LOCATION USED");
+            location = new Location("gps");
+            location.setLatitude(14.599512);
+            location.setLongitude(120.984222);
+        }
+        //Get map fragment
+        SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        //display map
+        roadMap.displayMap(location, mapFragment);
     }
 
     /**
@@ -105,8 +128,40 @@ public class MainActivity extends AppCompatActivity
         //Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        switch(id){
+            case R.id.mnLoc: {
+                Location location = tracker.getCurrentLocation();
+                if(location == null)
+                    Log.d("JOCAS", "GOOGLE MAP LOCATION NOT CHANGED");
+                else{
+                    Log.d("JOCAS", "GOOGLE MAP LOCATION CHANGED");
+                    roadMap.moveCamera(location);
+                }
+            }
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Log.d("JOCAS","ASD");
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.d("JOCAS","ASDD");
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.d("JOCAS","ASDS");
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.d("JOCAS","ASDD");
     }
 }
