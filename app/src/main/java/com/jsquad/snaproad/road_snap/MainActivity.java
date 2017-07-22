@@ -77,16 +77,14 @@ public class MainActivity extends AppCompatActivity
 
     private void init(){
         //Initialize GPSTracker
-        tracker = new GPSTracker(this);
-        tracker.start(400,0, null);
+        tracker = new GPSTracker(this, this);
 
         updateUserInfo();
 
         //Initialize Google Map
         roadMap = new RoadMap();
         //Get current location
-        //Location location = tracker.getLastKnownLocation();
-        Location location = null;
+        Location location = tracker.getLastKnownLocation();
         if(location == null){   //if there's no current location
             Log.d("JOCAS", "DEFAULT LOCATION USED");
             location = new Location("gps");
@@ -98,6 +96,8 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         //display map
         roadMap.displayMap(location, mapFragment);
+
+        tracker.start(2000, 0, null);
     }
 
     public void updateUserInfo(){

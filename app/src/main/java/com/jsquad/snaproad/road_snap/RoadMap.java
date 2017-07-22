@@ -1,7 +1,12 @@
 package com.jsquad.snaproad.road_snap;
 
+import android.*;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -60,6 +65,9 @@ public class RoadMap extends FragmentActivity implements OnMapReadyCallback,
         });
     }
 
+    public GoogleMap getGoogleMap(){
+        return googleMap;
+    }
 
     /**
      *

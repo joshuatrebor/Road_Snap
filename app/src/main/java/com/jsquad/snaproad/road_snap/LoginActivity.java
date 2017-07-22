@@ -45,40 +45,24 @@ public class LoginActivity extends AppCompatActivity implements OnCompleteListen
         btnLogin = (Button)findViewById(R.id.btnLogin);
         btnSignUp = (Button)findViewById(R.id.btnSignUp);
 
-        locationTest();
-        //init();
+        //locationTest();
+        init();
     }
 
     public void locationTest(){
-        GPSTracker tracker = new GPSTracker(this);
-        tracker.start(1000, 0, new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                Log.d("JOCAS",location.getLatitude() + " " + location.getLongitude());
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        });
+        Intent inten = new Intent(LoginActivity.this, TestActivity.class);
+        startActivity(inten);
     }
 
     private void init(){
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                authenticateUser(txtEmail.getText().toString(), txtPassword.getText().toString());
+                //authenticateUser(txtEmail.getText().toString(), txtPassword.getText().toString());
+                //test
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("uID", "Jsu7Javg0ySQQY4LocnpJk9GsLU2");
+                startActivity(intent);
             }
         });
         btnSignUp.setOnClickListener(new View.OnClickListener() {

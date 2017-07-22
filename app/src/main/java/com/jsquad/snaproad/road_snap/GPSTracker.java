@@ -1,7 +1,10 @@
 package com.jsquad.snaproad.road_snap;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -21,12 +24,14 @@ import com.google.android.gms.maps.model.LatLng;
 public class GPSTracker implements LocationListener {
 
     private Context context;
+    private Activity activity;
     private LocationManager locMan;
     private String provider;
     private Location location;
 
-    GPSTracker(Context context) {
+    GPSTracker(Context context, Activity activity) {
         this.context = context;
+        this.activity = activity;
         locMan = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         provider = locMan.getBestProvider(new Criteria(), true);
     }
@@ -34,11 +39,13 @@ public class GPSTracker implements LocationListener {
     public void start(long time, float distance, LocationListener locationListener){
         if(checkPermission()){
             if(locationListener != null){
-                locMan.requestLocationUpdates(provider, time, distance, locationListener);
+                locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, distance, locationListener);
+                locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, time, distance, locationListener);
                 Log.d("JOCAS", "GEOLOCATION STARTED USING GIVEN LISTENER");
             }
             else if(locationListener == null){
-                locMan.requestLocationUpdates(provider, time, distance, this);
+                locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, distance, this);
+                locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, time, distance, this);
                 Log.d("JOCAS", "GEOLOCATION STARTED USING GPSTRACKER LISTENER");
             }
         }
@@ -57,9 +64,7 @@ public class GPSTracker implements LocationListener {
         return null;
     }
 
-    public void askForPermission(){
-        
-    }
+
 
     public Location getCurrentLocation(){
         Log.d("JOCAS", location == null ? "LOCATION NOT YET AVAILABLE":"LOCATION RETURNED");
@@ -68,10 +73,34 @@ public class GPSTracker implements LocationListener {
 
     public boolean checkPermission(){
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("JOCAS", "LOCATION PERMISSION DENIED");
-            return false;
+            askForPermission();
+            return true;
         }
         return true;
+    }
+
+    public void askForPermission(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION)){
+            new AlertDialog.Builder(context)
+                    .setTitle("Location permission request")
+                    .setMessage("blabla")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //Prompt the user once explanation has been shown
+                            ActivityCompat.requestPermissions(activity,
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                    1);
+                        }
+                    })
+                    .create()
+                    .show();
+        }
+        else{
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission. ACCESS_FINE_LOCATION},
+                    1);
+        }
     }
 
     /**
