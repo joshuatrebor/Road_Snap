@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText txtEmail;
     private EditText txtPassword;
     private Button btnLogin;
-    private TextView tvJoin;
+    private Button btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         txtEmail = (EditText)findViewById(R.id.txtEmail);
         txtPassword = (EditText)findViewById(R.id.txtPassword);
         btnLogin = (Button)findViewById(R.id.btnLogin);
-        tvJoin = (TextView)findViewById(R.id.tvJoin);
+        btnSignUp = (Button)findViewById(R.id.btnSignUp);
 
         init();
     }
@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        tvJoin.setOnClickListener(new View.OnClickListener() {
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private String authenticateUser(String email, String password){
-        //TODO User Authertication
+        //TODO User Authentication
         return "Abc";
     }
 
