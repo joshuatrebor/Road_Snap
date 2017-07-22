@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="@android:color/white"
     tools:context="com.jsquad.snaproad.road_snap.LoginActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -41,7 +41,6 @@
 
         <EditText
             android:id="@+id/txtEmail"
-            style="@android:style/Widget.Material.Light.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

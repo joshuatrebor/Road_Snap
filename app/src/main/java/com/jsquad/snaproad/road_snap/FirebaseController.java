@@ -21,7 +21,6 @@ public class FirebaseController {
     }
 
     public void addFrame(LatLng location, Frame frame){
-        Log.d("jocas","GOES HERE");
         String geoBucket = (location.latitude+"").replace('.',' ') + "-" + (location.longitude+"").replace('.',' ');
         String key = ref.child("geoframes").child(geoBucket).push().getKey();
         ref.child("geoframes").child(geoBucket).child(key).setValue(frame);

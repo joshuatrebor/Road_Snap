@@ -13,8 +13,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.jsquad.snaproad.road_snap.MapsActivity" />
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        tools:context="com.jsquad.snaproad.road_snap.MapsActivity"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp" />
 
 </android.support.constraint.ConstraintLayout>

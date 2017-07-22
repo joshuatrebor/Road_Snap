@@ -1,16 +1,9 @@
 package com.jsquad.snaproad.road_snap;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,21 +14,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
+
+    private GPSTracker tracker;
+    private RoadMap roadMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +34,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //FLOATING ACTION
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,28 +44,29 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        //DRAWER LAYOUT
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        //NAVIGATION VIEW
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        //Adding new frames to firebase
-        FirebaseController firebase = new FirebaseController();
-        firebase.addFrame(new LatLng(14.6091,121.0223),
-                new Frame("https://i.ytimg.com/vi/G_ArRavmAz4/maxresdefault.jpg","jocas", new Date()));
-
-        //START GOOGLE MAP
-        SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
-        RoadMap roadMap = new RoadMap();
-        mapFragment.getMapAsync(roadMap);
-        GPSTracker tracker = new GPSTracker(this, roadMap);
-        tracker.start();
     }
 
+    private void init(){
+        roadMap = new RoadMap();
+        Location location = new Location("gps");
+        location.setLatitude(14.599512);
+        location.setLongitude(120.984222);
+        roadMap.displayMap(location);
+    }
+
+    /**
+     * NAVIGATION LISTENERS
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -110,9 +102,8 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        //Handle navigation view item clicks here.
         int id = item.getItemId();
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
