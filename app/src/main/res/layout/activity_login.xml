@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     tools:context="com.jsquad.snaproad.road_snap.LoginActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -12,6 +11,11 @@
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
+    <ImageView
+        android:id="@+id/imgLoginBG"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/welcome_bg" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,30 +24,31 @@
         android:orientation="vertical"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
-        android:paddingTop="100dp"
+        android:paddingTop="80dp"
         android:weightSum="1">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imgRoadSnapLogo"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="150dp"
             app:srcCompat="@drawable/road_snap_logo" />
 
-        <TextView
-            android:id="@+id/textView2"
+        <ImageView
+            android:id="@+id/imgAppName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-smallcaps"
-            android:text="Road Snap"
-            android:textAlignment="center"
-            android:textColor="#f1c40f"
-            android:textSize="36sp" />
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/name"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="80dp"/>
 
         <EditText
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="4"
+            android:gravity="center"
             android:hint="Email Address"
             android:inputType="textEmailAddress"
             android:textColor="#f1c40f" />
@@ -53,28 +58,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:gravity="center"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:paddingTop="10dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="#ffffff"
             android:text="Log In" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_weight="0.79" />
+            android:layout_height="5dp"/>
 
-        <TextView
-            android:id="@+id/tvJoin"
+        <Button
+            android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Not a member yet? Join Now!"
-            android:textAlignment="center"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textStyle="italic" />
+            android:layout_height="30dp"
+            android:background="#fff772"
+            android:backgroundTint="@color/black_overlay"
+            android:text="Sign Up" />
     </LinearLayout>
+
 
 </FrameLayout>
