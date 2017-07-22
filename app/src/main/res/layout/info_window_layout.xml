@@ -28,6 +28,6 @@
         android:textSize="20sp"
         android:background="#FFF772"
         android:backgroundTint="@color/black_overlay"
-        android:textColor='"FFFFFF"' />
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>
