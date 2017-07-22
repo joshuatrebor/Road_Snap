@@ -23,6 +23,11 @@ import android.view.MenuItem;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
 
@@ -31,6 +36,12 @@ public class MainActivity extends AppCompatActivity
 
     private GPSTracker tracker;
     private RoadMap roadMap;
+
+    //User data
+    private String uID;
+    private String userName;
+    private String lastName;
+    private String firstName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +80,8 @@ public class MainActivity extends AppCompatActivity
         tracker = new GPSTracker(this);
         tracker.start(400,0, null);
 
+        updateUserInfo();
+
         //Initialize Google Map
         roadMap = new RoadMap();
         //Get current location
@@ -85,6 +98,27 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         //display map
         roadMap.displayMap(location, mapFragment);
+    }
+
+    public void updateUserInfo(){
+        this.uID = getIntent().getStringExtra("uID");
+        FirebaseDatabase fireBase = FirebaseDatabase.getInstance();
+        DatabaseReference ref = fireBase.getReference();
+        ref.child("users").child(uID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                lastName = dataSnapshot.child("lastName").getValue().toString();
+                firstName = dataSnapshot.child("firstName").getValue().toString();
+                userName = dataSnapshot.child("userName").getValue().toString();
+                //TODO display username
+                Log.d("JOCAS",userName + " logged in");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     /**
