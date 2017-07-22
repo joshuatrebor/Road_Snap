@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     tools:context="com.jsquad.snaproad.road_snap.LoginActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -15,7 +16,7 @@
         android:id="@+id/imgLoginBG"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/welcome_bg" />
+        app:srcCompat="@drawable/welcome_bg2" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,11 +38,11 @@
             android:id="@+id/imgAppName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:srcCompat="@drawable/name"/>
+            app:srcCompat="@drawable/name" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="80dp"/>
+            android:layout_height="80dp" />
 
         <EditText
             android:id="@+id/txtEmail"
@@ -50,33 +51,39 @@
             android:ems="4"
             android:gravity="center"
             android:hint="Email Address"
+            android:textColorHint="#424141"
             android:inputType="textEmailAddress"
-            android:textColor="#f1c40f" />
+            android:textColor="#272727"
+            android:backgroundTint="@android:color/holo_red_light" />
 
         <EditText
             android:id="@+id/txtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="4"
             android:gravity="center"
             android:hint="Password"
             android:inputType="textPassword"
-            android:paddingTop="10dp" />
+            android:textColorHint="#424141"
+            android:paddingTop="10dp"
+            android:textColor="#272727"
+            android:backgroundTint="@android:color/holo_red_light" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+            android:layout_height="10dp" />
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="#ffffff"
+            android:textColor="#272727"
             android:text="Log In" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+            android:layout_height="5dp" />
 
         <Button
             android:id="@+id/btnSignUp"
@@ -84,7 +91,8 @@
             android:layout_height="30dp"
             android:background="#fff772"
             android:backgroundTint="@color/black_overlay"
-            android:text="Sign Up" />
+            android:text="Sign Up"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 
