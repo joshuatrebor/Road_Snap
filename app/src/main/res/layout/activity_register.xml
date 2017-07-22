@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1c40f"
+    android:background="@drawable/reg_bg"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -37,9 +37,19 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:layout_weight="4.94"
                 app:srcCompat="@drawable/road_snap_logo" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SIGN UP"
+                android:paddingTop="10dp"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="#000000"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -49,11 +59,16 @@
                     android:id="@+id/first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
                     android:hint="@string/first_name"
+                    android:textColorHint="#e6e2e2"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    android:backgroundTint="@android:color/holo_red_light" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -65,11 +80,16 @@
                     android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
                     android:hint="@string/last_name"
+                    android:textColorHint="#e6e2e2"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    android:backgroundTint="@android:color/holo_red_light" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -81,10 +101,15 @@
                     android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
                     android:hint="@string/user_name"
+                    android:textColorHint="#e6e2e2"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:backgroundTint="@android:color/holo_red_light" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -96,10 +121,15 @@
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
                     android:hint="@string/email"
+                    android:textColorHint="#e6e2e2"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:backgroundTint="@android:color/holo_red_light" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -111,13 +141,18 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
                     android:hint="@string/password"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColorHint="#e6e2e2"
+                    android:backgroundTint="@android:color/holo_red_light" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -129,6 +164,9 @@
                     android:id="@+id/confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
                     android:hint="@string/confirm_password"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
@@ -136,7 +174,9 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    android:textColorHint="#e6e2e2"
+                    android:backgroundTint="@android:color/holo_red_light" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -147,6 +187,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="@string/register"
+                android:background="#ffffff"
+                android:textColor="#272727"
                 android:text="Register"
                 android:textStyle="bold" />
 

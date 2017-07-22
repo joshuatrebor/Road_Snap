@@ -48,25 +48,25 @@
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_red_light"
             android:ems="4"
             android:gravity="center"
-            android:hint="Email Address"
-            android:textColorHint="#e6e2e2"
+            android:hint="@string/login_email"
             android:inputType="textEmailAddress"
             android:textColor="#272727"
-            android:backgroundTint="@android:color/holo_red_light" />
+            android:textColorHint="#e6e2e2" />
 
         <EditText
             android:id="@+id/txtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_red_light"
             android:ems="4"
             android:gravity="center"
-            android:hint="Password"
+            android:hint="@string/login_password"
             android:inputType="textPassword"
-            android:textColorHint="#e6e2e2"
             android:textColor="#272727"
-            android:backgroundTint="@android:color/holo_red_light" />
+            android:textColorHint="#e6e2e2" />
 
         <Space
             android:layout_width="match_parent"
@@ -77,8 +77,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="#ffffff"
-            android:textColor="#272727"
-            android:text="Log In" />
+            android:text="@string/login"
+            android:textColor="#272727" />
 
         <Space
             android:layout_width="match_parent"
@@ -90,7 +90,7 @@
             android:layout_height="30dp"
             android:background="#fff772"
             android:backgroundTint="@color/black_overlay"
-            android:text="Sign Up"
+            android:text="@string/sign_up"
             android:textColor="#ffffff" />
     </LinearLayout>
 

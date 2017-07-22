@@ -57,6 +57,10 @@ public class GPSTracker implements LocationListener {
         return null;
     }
 
+    public void askForPermission(){
+        
+    }
+
     public Location getCurrentLocation(){
         Log.d("JOCAS", location == null ? "LOCATION NOT YET AVAILABLE":"LOCATION RETURNED");
         return location;
