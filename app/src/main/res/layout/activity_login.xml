@@ -33,6 +33,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="5dp"
             android:fontFamily="sans-serif-smallcaps"
             android:text="Road Snap"
             android:textAlignment="center"
