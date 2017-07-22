@@ -26,4 +26,8 @@ public class FirebaseController {
         ref.child("geoframes").child(geoBucket).child(key).setValue(frame);
     }
 
+    public void addUser(String uID, User user){
+        ref.child("users").child(uID).setValue(user);
+    }
+
 }

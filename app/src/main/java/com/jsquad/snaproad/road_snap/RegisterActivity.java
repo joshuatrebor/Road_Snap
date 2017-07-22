@@ -35,6 +35,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,8 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class RegisterActivity extends AppCompatActivity implements OnClickListener {
+public class RegisterActivity extends AppCompatActivity implements OnClickListener,
+OnCompleteListener<AuthResult>{
 
     private EditText txtFirstName;
     private EditText txtLastName;
@@ -53,12 +56,13 @@ public class RegisterActivity extends AppCompatActivity implements OnClickListen
     private EditText txtPassword;
     private EditText txtConfirmPassword;
     private Button btnRegister;
-    private boolean isRegistered;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        auth = FirebaseAuth.getInstance();
 
         txtFirstName = (EditText)findViewById(R.id.first_name);
         txtLastName = (EditText)findViewById(R.id.last_name);
@@ -109,34 +113,40 @@ public class RegisterActivity extends AppCompatActivity implements OnClickListen
             return;
         }
         else {
-            Log.d("JOCAS","REG");
-            register();
-            if(isRegistered){
-                Log.d("JOCAS","REGS");
-                Toast.makeText(this,"Registration Successful", Toast.LENGTH_SHORT).show();
-                finishActivity(1);
-            }
-            else{
-                Toast.makeText(this, "Email address already in use", Toast.LENGTH_SHORT).show();
-                txtEmail.getText().clear();
-            }
+            btnRegister.setEnabled(false);
+            Toast.makeText(this, "Please wait", Toast.LENGTH_LONG);
+            auth.createUserWithEmailAndPassword(txtEmail.getText().toString(), txtPassword.getText()
+                    .toString()).addOnCompleteListener(this);
         }
 
     }
 
-    private void register() {
-        Authentication auth = new Authentication();
-        auth.registerUser(txtEmail.getText().toString(), txtPassword.getText().toString(),
-            new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful())
-                        isRegistered = true;
-                    else
-                        isRegistered = false;
-                }
-            });
-    }
 
+
+    @Override
+    public void onComplete(@NonNull Task<AuthResult> task) {
+        if(task.isSuccessful()){
+            FirebaseUser user = auth.getCurrentUser();
+            String uID = user.getUid();
+            FirebaseController fbController = new FirebaseController();
+            fbController.addUser(uID,
+                    new User(txtLastName.getText().toString(),
+                            txtFirstName.getText().toString(),
+                            txtUserName.getText().toString()));
+
+            Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Please verify your email address", Toast.LENGTH_LONG);
+            Log.d("JOCAS","REGISTRATION SUCCESS");
+            btnRegister.setEnabled(true);
+
+            finish();
+            return;
+        }
+        else{
+            Toast.makeText(this, "Email address already in use", Toast.LENGTH_SHORT).show();
+            txtEmail.getText().clear();
+            btnRegister.setEnabled(true);
+        }
+    }
 }
 
