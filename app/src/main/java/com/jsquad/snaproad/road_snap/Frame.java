@@ -7,14 +7,9 @@ import java.util.Date;
  */
 
 public class Frame {
-    String imgUrl;
     String[] plateNumbers;
     String sourceID;
     Date date;
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
 
     public String[] getPlateNumbers() {
         return plateNumbers;
@@ -28,8 +23,7 @@ public class Frame {
         return date;
     }
 
-    Frame(String imgUrl, String sourceID, Date date){
-        this.imgUrl = imgUrl;
+    Frame(String sourceID, Date date){
         this.sourceID = sourceID;
         this.date = date;
     }
