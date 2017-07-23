@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mnDashCam"
+        android:icon="@drawable/googleg_standard_color_18"
+        android:title="Dash Cam" />
+    <item
+        android:id="@+id/mnImport"
+        android:title="Import from Dash Cam" />
+    <item
+        android:id="@+id/mnLoc"
+        android:title="Go to my Location" />
+    <item
+        android:id="@+id/mnSettings"
+        android:title="Settings" />
+    <item
+        android:id="@+id/mnAbout"
+        android:title="About Road Snap" />
+</menu>

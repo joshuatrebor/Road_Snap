@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="#FFF"
+    android:gravity="top|left"
+    android:orientation="vertical"
+    android:paddingBottom="0dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="70dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:gravity="left|center"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="70dp"
+            android:layout_height="65dp"
+            android:paddingBottom="-30dp"
+            android:paddingLeft="-30dp"
+            android:paddingRight="-30dp"
+            android:paddingTop="-30dp"
+            app:srcCompat="@drawable/road_snap_logo" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.08"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Road Snap"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/black"
+            android:textSize="36dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:queryHint="Search Plate Number"
+        android:background="@color/black_overlay"
+        />
+
+</LinearLayout>

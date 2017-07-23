@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "602487574484",
+    "firebase_url": "https://roadsnap-94af3.firebaseio.com",
+    "project_id": "roadsnap-94af3",
+    "storage_bucket": "roadsnap-94af3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602487574484:android:2e97d0ebe23430d2",
+        "android_client_info": {
+          "package_name": "com.jsquad.snaproad.road_snap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602487574484-d1daisrft9cmj8ja7rbmdem59h1428cm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jsquad.snaproad.road_snap",
+            "certificate_hash": "7551ba7bc09e2b11b6d62a428bded5831fc0d7f2"
+          }
+        },
+        {
+          "client_id": "602487574484-3kimslcd6ai1n8bkr8qgq8ps61iso0lo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmdBZQk8tDX8XqfVhetBQPzI_jzcrSZP4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602487574484-3kimslcd6ai1n8bkr8qgq8ps61iso0lo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
