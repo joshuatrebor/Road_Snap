@@ -17,10 +17,10 @@
     </style>
 
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
+        <item name="android:background">"android:color/black_overlay"</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
     </style>
