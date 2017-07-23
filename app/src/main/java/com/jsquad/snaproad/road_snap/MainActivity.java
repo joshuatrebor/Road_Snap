@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity
         updateUserInfo();
 
         //Initialize Google Map
-        roadMap = new RoadMap();
+        roadMap = new RoadMap(this);
         //Get current location
         Location location = tracker.getLastKnownLocation();
         if(location == null){   //if there's no current location
