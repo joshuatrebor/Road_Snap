@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -12,10 +13,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
+import com.firebase.geofire.GeoQuery;
+import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -40,7 +47,9 @@ public class RoadMap extends FragmentActivity implements OnMapReadyCallback,
     private Location currentLocation;
     private Marker marker;
     private Context context;
-
+    private Circle circle;
+    private Marker cMarker;
+    private GeoFire geo;
 
     RoadMap(Context context){
         this.context = context;
@@ -93,10 +102,22 @@ public class RoadMap extends FragmentActivity implements OnMapReadyCallback,
                 return false;
             }
         });
+        CircleOptions ops = new CircleOptions()
+                .center(latLng)
+                .radius(50)
+                .strokeWidth(10)
+                .fillColor(Color.YELLOW);
+
+        circle = googleMap.addCircle(ops);
+        geo = new GeoFire(FirebaseDatabase.getInstance().getReference("geobase"));
     }
 
     public GoogleMap getGoogleMap(){
         return googleMap;
+    }
+
+    public void setFirebaseListener(){
+
     }
 
     /**
@@ -105,46 +126,43 @@ public class RoadMap extends FragmentActivity implements OnMapReadyCallback,
      */
     @Override
     public void onMapClick(LatLng latLng) {
-/*
-        ArrayList<LatLng> locs = getNearestLocations(latLng);
-        for(LatLng loc : locs){
-            Log.d("LOCS", loc.toString());
-        }
-*/
-        Toast.makeText(context,latLng.latitude + " " + latLng.longitude, Toast.LENGTH_LONG).show();
-        if(marker == null){
-            marker = googleMap.addMarker(new MarkerOptions()
-                    .position(latLng)
-            );
-        }
-        else{
-            marker.setPosition(latLng);
-        }
-        Log.d("JOCAS","ASDASDl");
-        String slat = latLng.latitude+"".substring(0,9);
-        String slon = latLng.longitude+"".substring(0,9);
-        double lat = Double.parseDouble(slat);
-        double lon = Double.parseDouble(slon);
-        String geoBucket = (lat+"").replace("."," ") + "-" + (lon+"").replace("."," ");
-        Log.d("JOCAS","ASDASD");
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("geobuckets");
-        Log.d("JOCAS","ASDASD");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        circle.setCenter(latLng);
+        GeoQuery query = geo.queryAtLocation(new GeoLocation(latLng.latitude,latLng.longitude),.05);
+        query.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("JOCAS","LKJLKJ");
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Log.d("snaps", snapshot.child("imgUrl").getValue().toString());
-                }
+            public void onKeyEntered(String key, GeoLocation location) {
+                Marker marker = googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(location.latitude, location.longitude)));
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+
+                        return true;
+                    }
+                });
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onKeyExited(String key) {
+
+            }
+
+            @Override
+            public void onKeyMoved(String key, GeoLocation location) {
+
+            }
+
+            @Override
+            public void onGeoQueryReady() {
+
+            }
+
+            @Override
+            public void onGeoQueryError(DatabaseError error) {
 
             }
         });
-
     }
 
     @Override

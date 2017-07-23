@@ -24,6 +24,8 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -128,6 +130,8 @@ Camera.PictureCallback{
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference ref = storage.getReference();
 
+        final GeoFire geo = new GeoFire(dref.child("geobase"));
+
         Log.d("jocas","HEEEERE2");
         final String geoBucket = (location.getLatitude()+"").replace("."," ") + "-" + (location.getLongitude()+"").replace("."," ");
         final String key = dref.child("geobuckets").child(geoBucket).push().getKey();
@@ -147,6 +151,10 @@ Camera.PictureCallback{
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 dref.child("geobuckets").child(geoBucket).child(key).child("imgUrl").setValue(downloadUrl.toString());
                 Log.d("jocas", geoBucket);
+                String key = dref.child("geobase").push().getKey();
+                dref.child("geobase").child(key).setValue(new Frame(getIntent().getStringExtra("userName"), new Date()));
+                dref.child("geobase").child(key).child("imgUrl").setValue(downloadUrl.toString());
+                geo.setLocation(key, new GeoLocation(location.getLatitude(),location.getLongitude()));
             }
         });
     }
