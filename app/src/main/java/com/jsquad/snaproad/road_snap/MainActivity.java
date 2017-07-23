@@ -1,6 +1,7 @@
 package com.jsquad.snaproad.road_snap;
 
 import android.content.Intent;
+import android.hardware.Camera;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -167,7 +168,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             }
             case R.id.mnDashCam:{
+                tracker.stop();
                 Intent intent = new Intent(MainActivity.this, DashCamActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
                 break;
             }

@@ -28,6 +28,7 @@ public class GPSTracker implements LocationListener {
     private LocationManager locMan;
     private String provider;
     private Location location;
+    private LocationListener listener;
 
     GPSTracker(Context context, Activity activity) {
         this.context = context;
@@ -39,16 +40,22 @@ public class GPSTracker implements LocationListener {
     public void start(long time, float distance, LocationListener locationListener){
         if(checkPermission()){
             if(locationListener != null){
+                listener = locationListener;
                 locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, distance, locationListener);
                 locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, time, distance, locationListener);
                 Log.d("JOCAS", "GEOLOCATION STARTED USING GIVEN LISTENER");
             }
             else if(locationListener == null){
+                listener = this;
                 locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, distance, this);
                 locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, time, distance, this);
                 Log.d("JOCAS", "GEOLOCATION STARTED USING GPSTRACKER LISTENER");
             }
         }
+    }
+
+    public void stop(){
+        locMan.removeUpdates(listener);
     }
 
     public Location getLastKnownLocation(){
